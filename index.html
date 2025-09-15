@@ -1,0 +1,690 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MIKU39 Whitepaper</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(128, 125, 120, 1);
+	fill: rgba(128, 125, 120, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(199, 121, 69, 1);
+	fill: rgba(199, 121, 69, 1);
+}
+.highlight-yellow {
+	color: rgba(175, 136, 66, 1);
+	fill: rgba(175, 136, 66, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(63, 126, 190, 1);
+	fill: rgba(63, 126, 190, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(174, 96, 133, 1);
+	fill: rgba(174, 96, 133, 1);
+}
+.highlight-red {
+	color: rgba(201, 85, 73, 1);
+	fill: rgba(201, 85, 73, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.highlight-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.highlight-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.highlight-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(232, 242, 250, 1);
+}
+.highlight-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.highlight-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.highlight-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(128, 125, 120, 1);
+	fill: rgba(128, 125, 120, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(199, 121, 69, 1);
+	fill: rgba(199, 121, 69, 1);
+}
+.block-color-yellow {
+	color: rgba(175, 136, 66, 1);
+	fill: rgba(175, 136, 66, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(63, 126, 190, 1);
+	fill: rgba(63, 126, 190, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(174, 96, 133, 1);
+	fill: rgba(174, 96, 133, 1);
+}
+.block-color-red {
+	color: rgba(201, 85, 73, 1);
+	fill: rgba(201, 85, 73, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(232, 242, 250, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 99, 174, 0.172); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="26f92006-1a21-80e1-8e35-e9590f4c117a" class="page sans"><header><img class="page-cover-image" src="https://raw.githubusercontent.com/onlymikufans/onlymikufans.github.io/main/assets/miku2.png" style="object-position:center 34.86%"/><h1 class="page-title"><strong>MIKU39 Whitepaper</strong></h1><p class="page-description"></p></header><div class="page-body"><div id="26f92006-1a21-80cc-927b-d00e3e61188d" class="column-list"><div id="26f92006-1a21-80a9-9c31-f635a3f54fd7" style="width:18.75%" class="column"><figure id="26f92006-1a21-803a-b4cc-ccab72afc9bc" class="image" style="text-align:center"><a href="https://raw.githubusercontent.com/onlymikufans/onlymikufans.github.io/main/assets/miku1.png"><img style="width:240px" src="https://raw.githubusercontent.com/onlymikufans/onlymikufans.github.io/main/assets/miku1.png"/></a></figure><p id="26f92006-1a21-8077-b961-f068c132798e" class=""><a href="https://x.com/onlymikufans">https://x.com/onlymikufans</a></p><nav id="26f92006-1a21-80f2-82ab-d9dea7509f0c" class="block-color-default table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26f92006-1a21-8017-b672-e0fdab47ba93"><strong>I. Project Vision</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26f92006-1a21-8039-b677-c2b0ee8995e6"><strong>II. Token Allocation</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26f92006-1a21-8192-889f-e43e4832e071"><strong>III. </strong>Sale Plan (Four Phases)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26f92006-1a21-81a8-94c5-efbd46e15ee4"><strong>IV. </strong>Airdrop Design</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#26f92006-1a21-81ba-aa5a-c9cc1731eb89">Airdrop Principles</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#26f92006-1a21-8119-8a9c-fc064a00ca03">Airdrop Categories</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#26f92006-1a21-81e3-abc2-e4c2d92344ad">Unlocking Rules (Optimized)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26f92006-1a21-8102-8a41-c5408488025a"><strong>V. </strong>DAO Governance (Post-Phase 4)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#26f92006-1a21-81b8-973b-ca89eb944b18">Fund &amp; Token Status</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#26f92006-1a21-815b-9c5e-c59ca014c884">Governance Framework</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26f92006-1a21-8112-b9c6-f89ba4595078"><strong>VI. </strong>Long-Term Price Stability Logic</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26f92006-1a21-81ff-829d-d23811406c2d"><strong>VII. </strong>Appendix: Airdrop Unlock Schedule</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26f92006-1a21-8140-8a05-f31dfced2077">⚖️ Legal Disclaimer</a></div></nav></div><div id="26f92006-1a21-80e1-bbdf-f98627a40000" style="width:81.24999999999997%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26f92006-1a21-80f6-a330-ebed7bc08471"><div style="font-size:1.5em"><span class="icon">📍</span></div><div style="width:100%"><p id="26f92006-1a21-8063-b129-fe0bc13fb934" class="block-color-default_background"><strong>Mint Address:</strong> <code>12tZyE2MwgEWTBXCAT3E61XZ6iQFMv2tgpxQPcUgmiku</code></p></div></figure><h1 id="26f92006-1a21-8017-b672-e0fdab47ba93" class=""><strong>I. Project Vision</strong></h1><blockquote id="26f92006-1a21-80a1-936e-e26c0d02159f" class="">MIKU39 is an experimental token project designed for the Hatsune Miku fan community. Its purpose goes beyond token value appreciation — it aims to build a <strong>decentralized creative community</strong> through <strong>creation incentives + fan activities + community governance</strong>.<p id="26f92006-1a21-801b-b622-e05f450009c2" class=""><mark class="highlight-pink"><mark class="highlight-pink_background"><strong>Slogan: “For Creativity, For Miku, For Community.”</strong></mark></mark></p></blockquote><hr id="26f92006-1a21-80e6-b9de-c34352f9c187"/><h1 id="26f92006-1a21-8039-b677-c2b0ee8995e6" class=""><strong>II. Token Allocation</strong></h1><table id="26f92006-1a21-816e-9016-c6f7f54f4c7a" class="simple-table"><thead class="simple-table-header"><tr id="26f92006-1a21-8142-b81e-c41f4f04874a"><th id="?|oX" class="simple-table-header-color simple-table-header" style="width:156.6125030517578px">Category</th><th id="RAiF" class="simple-table-header-color simple-table-header" style="width:66.0875015258789px">Share</th><th id="zcIq" class="simple-table-header-color simple-table-header" style="width:145.35000610351562px">Amount (MIKU39)</th><th id="EqxZ" class="simple-table-header-color simple-table-header" style="width:325.25px">Notes</th></tr></thead><tbody><tr id="26f92006-1a21-81ca-b2d7-c8caa7a51880"><td id="?|oX" class="" style="width:156.6125030517578px">Team &amp; Initial Liquidity</td><td id="RAiF" class="" style="width:66.0875015258789px">10%</td><td id="zcIq" class="" style="width:145.35000610351562px">3,939,394</td><td id="EqxZ" class="" style="width:325.25px">Initial pool + team reserve</td></tr><tr id="26f92006-1a21-810a-9c21-f00ca9afa219"><td id="?|oX" class="" style="width:156.6125030517578px">Community Airdrop</td><td id="RAiF" class="" style="width:66.0875015258789px">60%</td><td id="zcIq" class="" style="width:145.35000610351562px">23,636,363</td><td id="EqxZ" class="" style="width:325.25px">Fan activities, creation, consumer rewards</td></tr><tr id="26f92006-1a21-8190-8ab9-e43823776b2e"><td id="?|oX" class="" style="width:156.6125030517578px">Community Sale</td><td id="RAiF" class="" style="width:66.0875015258789px">30%</td><td id="zcIq" class="" style="width:145.35000610351562px">11,818,181</td><td id="EqxZ" class="" style="width:325.25px">Four phases, no further issuance after completion</td></tr><tr id="26f92006-1a21-81ac-afc7-f1728ada21d6"><td id="?|oX" class="block-color-pink" style="width:156.6125030517578px"><strong>Total</strong></td><td id="RAiF" class="block-color-pink" style="width:66.0875015258789px"><strong>100%</strong></td><td id="zcIq" class="block-color-pink" style="width:145.35000610351562px"><strong>39,393,939</strong></td><td id="EqxZ" class="block-color-pink" style="width:325.25px">-</td></tr></tbody></table><hr id="26f92006-1a21-80f5-846e-fd63ad3eb6a8"/><h1 id="26f92006-1a21-8192-889f-e43e4832e071" class=""><strong>III. </strong>Sale Plan (Four Phases)</h1><div id="26f92006-1a21-80f5-8bda-e1acf6d653f2" class="column-list"><div id="26f92006-1a21-80fb-a94e-ea87cda64215" style="width:49.99999999999999%" class="column"><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="26f92006-1a21-8037-b1d1-fab76cf17792"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/die1_green.svg"/></div><div style="width:100%"><p id="26f92006-1a21-8041-8d75-f72b4aea80bf" class=""><strong>Phase 1</strong></p><hr id="26f92006-1a21-8087-a803-d4fef5a33fd3"/><ul id="26f92006-1a21-81f8-b531-fdeae31176f9" class="bulleted-list"><li style="list-style-type:disc">Sale Volume: 985,000</li></ul><ul id="26f92006-1a21-81b9-b267-f945b5b02274" class="bulleted-list"><li style="list-style-type:disc">Price: 0.01 USD</li></ul><ul id="26f92006-1a21-81fb-bc7d-e392c6cc9d84" class="bulleted-list"><li style="list-style-type:disc">Revenue: 9,850 USDT</li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="26f92006-1a21-80ef-b9a8-ca86a5a79b6e"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/die3_purple.svg"/></div><div style="width:100%"><p id="26f92006-1a21-8181-9528-dd1bf98de175" class=""><strong>Phase 3</strong></p><hr id="26f92006-1a21-80eb-a0a7-f73b74fb2715"/><ul id="26f92006-1a21-8125-8f54-e51e87ac2980" class="bulleted-list"><li style="list-style-type:disc">Sale Volume: 3,150,000</li></ul><ul id="26f92006-1a21-8119-a88d-d788e86fdc23" class="bulleted-list"><li style="list-style-type:disc">Price: 0.04 USD</li></ul><ul id="26f92006-1a21-81ba-8851-ccb21508d358" class="bulleted-list"><li style="list-style-type:disc">Revenue: 126,048 USDT</li></ul></div></figure></div><div id="26f92006-1a21-8071-b606-fea37c101cfe" style="width:49.99999999999999%" class="column"><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="26f92006-1a21-802a-9d99-e1bdea4675d2"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/die2_blue.svg"/></div><div style="width:100%"><p id="26f92006-1a21-8141-bc71-c8e183d982c1" class=""><strong>Phase 2</strong></p><hr id="26f92006-1a21-8030-a980-fb3662e6f880"/><ul id="26f92006-1a21-8184-9262-d06ccaee86b6" class="bulleted-list"><li style="list-style-type:disc">Sale Volume: 2,170,000</li></ul><ul id="26f92006-1a21-8186-bd2c-d3f9ef6bf280" class="bulleted-list"><li style="list-style-type:disc">Price: 0.025 USD</li></ul><ul id="26f92006-1a21-817f-9b30-cfc3edc46c25" class="bulleted-list"><li style="list-style-type:disc">Revenue: 54,250 USDT</li></ul></div></figure><figure class="block-color-default callout" style="white-space:pre-wrap;display:flex" id="26f92006-1a21-801a-a8af-d414f5a5d27e"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/die4_pink.svg"/></div><div style="width:100%"><p id="26f92006-1a21-81b6-b51a-d1ba1bb6c30d" class=""><strong>Phase 4</strong></p><hr id="26f92006-1a21-80fd-9c78-c1ada86c4722"/><ul id="26f92006-1a21-81fc-98c1-dec34ccac69c" class="bulleted-list"><li style="list-style-type:disc">Sale Volume: 5,900,000</li></ul><ul id="26f92006-1a21-8193-bf78-d185347e4ab5" class="bulleted-list"><li style="list-style-type:disc">Price: 0.06 USD</li></ul><ul id="26f92006-1a21-812f-8db3-dead5a6be643" class="bulleted-list"><li style="list-style-type:disc">Revenue: 354,000 USDT</li></ul></div></figure></div></div><hr id="26f92006-1a21-80f3-afa4-ed877a81e314"/><h1 id="26f92006-1a21-81a8-94c5-efbd46e15ee4" class=""><strong>IV. </strong>Airdrop Design</h1><figure id="26f92006-1a21-80bf-a324-d738b5a0d7a8" class="image" style="text-align:center"><a href="https://raw.githubusercontent.com/onlymikufans/onlymikufans.github.io/main/assets/miku3.png"><img style="width:1488px" src="https://raw.githubusercontent.com/onlymikufans/onlymikufans.github.io/main/assets/miku3.png"/></a><figcaption>Airdrop &amp; Conversion Flow</figcaption></figure><h2 id="26f92006-1a21-81ba-aa5a-c9cc1731eb89" class="">Airdrop Principles</h2><ul id="26f92006-1a21-814f-bc3d-ca01967bf031" class="bulleted-list"><li style="list-style-type:disc">Reward fan creation and activity participation.</li></ul><ul id="26f92006-1a21-8157-8107-fbb399603167" class="bulleted-list"><li style="list-style-type:disc">Avoid concentrated selling pressure with phased unlocking.</li></ul><ul id="26f92006-1a21-818c-a8fa-c2eebfc6320b" class="bulleted-list"><li style="list-style-type:disc">Focus on long-term incentives, not one-time cash-outs.</li></ul><h2 id="26f92006-1a21-8119-8a9c-fc064a00ca03" class="">Airdrop Categories</h2><ol type="1" id="26f92006-1a21-8119-99c0-fb70dfa72b0c" class="numbered-list" start="1"><li><strong>Hardcore Fan Targeted Airdrop</strong><ul id="26f92006-1a21-8146-86a3-f08e7eb6762d" class="bulleted-list"><li style="list-style-type:disc">393 super creators (≥393.9 hours of creative contribution), each receives 3,939 MIKU39, total 1.55M.</li></ul><ul id="26f92006-1a21-8129-9726-f7f11bc23752" class="bulleted-list"><li style="list-style-type:disc">3,939 creators (≥39.39 hours of contribution), each receives 393.9 MIKU39, total 1.55M.</li></ul></li></ol><ol type="1" id="26f92006-1a21-8144-86a0-ecd42dfa85cf" class="numbered-list" start="2"><li><strong>Community Activity Airdrop</strong><ul id="26f92006-1a21-81d4-a1a4-fa9c1f363403" class="bulleted-list"><li style="list-style-type:disc">Creative activities (online art, songwriting, karaoke), weighted by hours.</li></ul><ul id="26f92006-1a21-8133-a7c6-eae387b9038c" class="bulleted-list"><li style="list-style-type:disc">Consumer activities (tickets, gatherings), weighted by time or headcount.</li></ul><ul id="26f92006-1a21-818f-b155-c1ddd42303b8" class="bulleted-list"><li style="list-style-type:disc">Airdrop base: 39 × weight.</li></ul></li></ol><ol type="1" id="26f92006-1a21-8102-8378-dbb1febdda75" class="numbered-list" start="3"><li><strong>Long-Term Airdrop Target (3–6 months)</strong><ul id="26f92006-1a21-81e7-a6af-df8aa4a6e457" class="bulleted-list"><li style="list-style-type:disc">20,000 participants covered, total release ~19.36M MIKU39.</li></ul><ul id="26f92006-1a21-81b9-a291-c6757d1f7353" class="bulleted-list"><li style="list-style-type:disc">New creative hours: 160,000 (~9.36M tokens).</li></ul><ul id="26f92006-1a21-8120-a04e-f5afbb7ad61f" class="bulleted-list"><li style="list-style-type:disc">New consumer hours: 480,000 (~9.36M tokens).</li></ul></li></ol><h2 id="26f92006-1a21-81e3-abc2-e4c2d92344ad" class="">Unlocking Rules (Optimized)</h2><ul id="26f92006-1a21-813b-a690-d1a753a412e4" class="bulleted-list"><li style="list-style-type:disc">Max unlock per phase ≤15%.</li></ul><ul id="26f92006-1a21-81e5-8655-d9ec7f0aeaac" class="bulleted-list"><li style="list-style-type:disc"><strong>1-month cooling period</strong> after each sale.</li></ul><ul id="26f92006-1a21-81b7-ac1c-c1339aa75c72" class="bulleted-list"><li style="list-style-type:disc">Linear unlocking over <strong>3 months</strong> after cooling.</li></ul><ul id="26f92006-1a21-8175-acff-ce35de5d7b02" class="bulleted-list"><li style="list-style-type:disc">DAO may vote to delay or accelerate unlocking.</li></ul><p id="26f92006-1a21-8044-acdc-e34076a9446f" class="">
+</p><hr id="26f92006-1a21-8085-8ec6-c4f7017f5254"/><h1 id="26f92006-1a21-8102-8a41-c5408488025a" class=""><strong>V. </strong>DAO Governance (Post-Phase 4)</h1><h2 id="26f92006-1a21-81b8-973b-ca89eb944b18" class="">Fund &amp; Token Status</h2><ul id="26f92006-1a21-8196-a30b-c16513d59238" class="bulleted-list"><li style="list-style-type:disc">Completed Sales: 11.8M MIKU39 ≈ 544,000 USDT.</li></ul><ul id="26f92006-1a21-811f-8f10-c29748f856dd" class="bulleted-list"><li style="list-style-type:disc">DAO Treasury: ≥150,000 USDT (price support pool).</li></ul><h2 id="26f92006-1a21-815b-9c5e-c59ca014c884" class="">Governance Framework</h2><ol type="1" id="26f92006-1a21-81be-bd63-d0d778393333" class="numbered-list" start="1"><li><strong>Price Support Funds</strong>: DAO votes on usage.</li></ol><ol type="1" id="26f92006-1a21-8152-a33b-d505fd169305" class="numbered-list" start="2"><li><strong>Airdrop Management</strong>: Max 1M MIKU39 per quarter via proposals.</li></ol><ol type="1" id="26f92006-1a21-81c1-b69d-dfa0f77751c7" class="numbered-list" start="3"><li><strong>Team Role</strong>: Event initiator only, requests budget from DAO.</li></ol><ol type="1" id="26f92006-1a21-818a-b0d7-eb7d72a2e441" class="numbered-list" start="4"><li><strong>Proposal Threshold</strong>: ≥0.1% MIKU39 holders may propose.</li></ol><hr id="26f92006-1a21-801c-8425-dc88b8e03696"/><h1 id="26f92006-1a21-8112-b9c6-f89ba4595078" class=""><strong>VI. </strong>Long-Term Price Stability Logic</h1><ul id="26f92006-1a21-8199-aa2c-cda46d27f9f9" class="bulleted-list"><li style="list-style-type:disc"><strong>Absorbing Sell Pressure</strong>: Airdrop unlocks diluted across time; DAO may repurchase for redistribution.</li></ul><ul id="26f92006-1a21-81f1-9460-c870cf2eee7e" class="bulleted-list"><li style="list-style-type:disc"><strong>Sustainable Value</strong>: Token tied to fan creations &amp; activities, ensuring demand &amp; liquidity.</li></ul><hr id="26f92006-1a21-801b-8771-e85720ccd99d"/><h1 id="26f92006-1a21-81ff-829d-d23811406c2d" class=""><strong>VII. </strong>Appendix: Airdrop Unlock Schedule</h1><table id="26f92006-1a21-81fa-966a-d3ac73dd97cb" class="simple-table"><thead class="simple-table-header"><tr id="26f92006-1a21-814e-95f1-e71b40351fc7"><th id="[I\&lt;" class="simple-table-header-color simple-table-header" style="width:103.67500305175781px">Unlock Phase</th><th id="dVOE" class="simple-table-header-color simple-table-header" style="width:188.6999969482422px">Start Time</th><th id="QGix" class="simple-table-header-color simple-table-header" style="width:115.875px">Amount</th><th id="uorN" class="simple-table-header-color simple-table-header" style="width:284.7250061035156px">Unlock Method</th></tr></thead><tbody><tr id="26f92006-1a21-816d-9605-cd12293a52c3"><td id="[I\&lt;" class="" style="width:103.67500305175781px">Phase 1</td><td id="dVOE" class="" style="width:188.6999969482422px">After Sale Phase 1 begins</td><td id="QGix" class="" style="width:115.875px">497,500</td><td id="uorN" class="" style="width:284.7250061035156px">Linear unlock linked to sales</td></tr><tr id="26f92006-1a21-8146-bc57-f5685985a9a4"><td id="[I\&lt;" class="" style="width:103.67500305175781px">Phase 2</td><td id="dVOE" class="" style="width:188.6999969482422px">After Sale Phase 2 begins</td><td id="QGix" class="" style="width:115.875px">1,080,000</td><td id="uorN" class="" style="width:284.7250061035156px">Linear unlock linked to sales</td></tr><tr id="26f92006-1a21-81c3-8515-d0930924389d"><td id="[I\&lt;" class="" style="width:103.67500305175781px">Phase 3</td><td id="dVOE" class="" style="width:188.6999969482422px">After Sale Phase 3 begins</td><td id="QGix" class="" style="width:115.875px">1,575,000</td><td id="uorN" class="" style="width:284.7250061035156px">Linear unlock linked to sales</td></tr><tr id="26f92006-1a21-81df-8bcb-dfc18d0efbe5"><td id="[I\&lt;" class="" style="width:103.67500305175781px">Phase 4</td><td id="dVOE" class="" style="width:188.6999969482422px">After Sale Phase 4 begins</td><td id="QGix" class="" style="width:115.875px">1,770,000</td><td id="uorN" class="" style="width:284.7250061035156px">Linear unlock linked to sales</td></tr><tr id="26f92006-1a21-8105-a03e-d388fd6636b4"><td id="[I\&lt;" class="" style="width:103.67500305175781px">Phase 5</td><td id="dVOE" class="" style="width:188.6999969482422px">After Phase 4 fully unlocked</td><td id="QGix" class="" style="width:115.875px">15,000,000</td><td id="uorN" class="" style="width:284.7250061035156px">36-month linear unlock (~104,167 per week)</td></tr></tbody></table><hr id="26f92006-1a21-80af-b6b9-ddc323d77803"/><h1 id="26f92006-1a21-8140-8a05-f31dfced2077" class="">⚖️ Legal Disclaimer</h1><blockquote id="26f92006-1a21-819c-b33c-f051c23901a7" class="block-color-orange_background">The <strong>MIKU39 Project</strong> is a community-driven, experimental initiative created for educational and entertainment purposes only. Nothing contained in this whitepaper, website, or related materials shall be considered financial advice, investment advice, or a solicitation to purchase or sell any financial instrument.<p id="26f92006-1a21-813a-bbe4-f119ba61c8c3" class="">By participating in this project, you acknowledge and agree that:</p><ul id="26f92006-1a21-8163-9a2c-f9084dbbec48" class="bulleted-list"><li style="list-style-type:disc"><strong>No Guarantees</strong><br/>The MIKU39 token does not represent ownership, equity, or claims on any entity, assets, or future profits. No guarantees are made regarding value, liquidity, or long-term viability.</li></ul><ul id="26f92006-1a21-8184-8d8c-ed74dc692939" class="bulleted-list"><li style="list-style-type:disc"><strong>Jurisdictional Restrictions</strong><br/>Participation is not available in jurisdictions where it is prohibited or restricted by law. It is the sole responsibility of each participant to comply with local regulations.</li></ul><ul id="26f92006-1a21-817d-a7cc-febc7794b6cc" class="bulleted-list"><li style="list-style-type:disc"><strong>Non-Profit Nature</strong><br/>The team operates on a non-profit basis. All funds raised support community activities, project development, and ecosystem growth. The team does not derive personal income.</li></ul><ul id="26f92006-1a21-8189-8a33-e880e141439d" class="bulleted-list"><li style="list-style-type:disc"><strong>Risk Disclosure</strong><br/>Cryptographic tokens are highly volatile, experimental, and carry substantial risk. Participants should never contribute funds they cannot afford to lose.</li></ul><p id="26f92006-1a21-81ac-af9d-cb1c429e599b" class=""><em><mark class="highlight-orange"><strong>By engaging with this project, you confirm that you are doing so voluntarily, at your own risk, and in full compliance with applicable laws.</strong></mark></em></p></blockquote></div></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
